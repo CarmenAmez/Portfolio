@@ -1,4 +1,6 @@
 import Layout from '../components/Layout';
+import ArtCSSMasonry from '../components/ArtCSSMasonry';
+
 import img1 from '../assets/A4.png';
 import img2 from '../assets/abuela.png';
 import img3 from '../assets/aleatorio.png';
@@ -28,7 +30,6 @@ import img26 from '../assets/pajaro.jpg';
 import img27 from '../assets/pascual.png';
 import img28 from '../assets/quimera2.png';
 import img29 from '../assets/ratón.png';
-import img30 from '../assets/reina.png';
 import img31 from '../assets/rosa.png';
 import img32 from '../assets/rubia.png';
 import img33 from '../assets/serpiente.png';
@@ -36,126 +37,52 @@ import img34 from '../assets/setas.png';
 import img35 from '../assets/sombra.png';
 import img36 from '../assets/ventana.png';
 
+const images = [
+    { src: img1, title: 'A4' },
+    { src: img2, title: 'Retrado de un pedido personal' },
+    { src: img3, title: 'Aleatorio' },
+    { src: img4, title: 'Bonsái' },
+    { src: img5, title: 'Calabera' },
+    { src: img6, title: 'Calaserpi' },
+    { src: img7, title: 'Caset' },
+    { src: img8, title: 'Chip de La Bella y la Bestia' },
+    { src: img9, title: 'Corazón' },
+    { src: img10, title: 'Cuervo Japo' },
+    { src: img11, title: 'Cuervo' },
+    { src: img12, title: 'Delia' },
+    { src: img13, title: 'Diablo' },
+    { src: img14, title: 'Escultura' },
+    { src: img15, title: 'Gato' },
+    { src: img16, title: 'Güelito' },
+    { src: img17, title: 'Gusgus' },
+    { src: img18, title: 'Hamburguesa' },
+    { src: img19, title: 'Inés' },
+    { src: img20, title: 'Libro' },
+    { src: img21, title: 'Lobo' },
+    { src: img22, title: 'Magia' },
+    { src: img23, title: 'Manos' },
+    { src: img24, title: 'Mujer' },
+    { src: img25, title: 'Niña' },
+    { src: img26, title: 'Pájaro' },
+    { src: img27, title: 'Pascal' },
+    { src: img28, title: 'Quimera' },
+    { src: img29, title: 'Ratón' },
+    { src: img36, title: 'Reina' },
+    { src: img31, title: 'Rosa' },
+    { src: img32, title: 'Rubia' },
+    { src: img33, title: 'Serpiente' },
+    { src: img34, title: 'Setas' },
+    { src: img35, title: 'Sombra' },
+
+];
 
 const Art = () => {
     return (
-        <div>
-            <Layout />
-            <h1 style={{ margin: 'auto' }}>Arte</h1>
-            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-                <div >
-                    <img src={img1} alt="Image 1" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img2} alt="Image 2" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img3} alt="Image 3" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img4} alt="Image 4" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img5} alt="Image 5" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img6} alt="Image 6" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img7} alt="Image 7" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img8} alt="Image 8" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img9} alt="Image 9" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img10} alt="Image 10" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img11} alt="Image 11" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img12} alt="Image 12" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img13} alt="Image 13" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img14} alt="Image 14" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img15} alt="Image 15" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img16} alt="Image 16" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img17} alt="Image 17" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img18} alt="Image 18" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img19} alt="Image 19" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img20} alt="Image 20" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img21} alt="Image 21" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img22} alt="Image 22" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img23} alt="Image 23" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img24} alt="Image 24" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img25} alt="Image 25" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img26} alt="Image 26" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img27} alt="Image 27" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img28} alt="Image 28" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img29} alt="Image 29" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img30} alt="Image 30" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img31} alt="Image 31" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img32} alt="Image 32" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img33} alt="Image 33" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img34} alt="Image 34" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img35} alt="Image 35" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-                <div>
-                    <img src={img36} alt="Image 36" style={{ width: '300px', height: 'auto', display: 'inline-block' }} />
-                </div>
-            </div>
-        </div>
+        <Layout>
+            <h1 style={{ textAlign: 'center', margin: '2rem 0' }}>Arte</h1>
+            <ArtCSSMasonry images={images} />
+        </Layout>
+    );
+};
 
-    )
-
-}
-
-export default Art
+export default Art;

@@ -1,124 +1,133 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
+import fondo from '../assets/fondo.jpeg';
 
-export const GlobalStyle = createGlobalStyle`
-    body {
-        font-family: myFont;
-        font-size: 1.5rem;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-        position: relative;
-        min-height: 100vh;
-    }
+// Estilos globales
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
+  body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #CAF1CA;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #C8B3EE;
+    border-radius: 6px;
+    border: 2px solid #FDCAE1;
+  }
 `;
 
-// Contenedor principal
-const Container = styled.div`
-display: flex;
-width: 100%;
-position: fixed;
-top: 0;
-z-index: 1000;
+// Imagen de fondo estirada horizontalmente
+const BackgroundImage = styled.img`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: fill; /* Ocupa todo el ancho sin dejar bordes */
+  z-index: -1;
 `;
 
-
-
-// Estilos para Nav
-const Nav = styled.nav`
-background-color: #CAF1CA;
-width: 100%;
-height: 60px;
-display: flex;
-justify-content: center;
-align-items: center;
-opacity: 0.8;
-font-family: Arial, Helvetica, sans-serif;
-padding: 0 10px;
+// Contenedor general del layout (horizontal)
+const LayoutContainer = styled.div`
+  display: flex;
+  width: 100%;
 `;
 
-
-// Estilos para la lista de navegación
-const Ul = styled.ul`
-list-style: none;
-display: flex;
-justify-content: center;
-padding: 0;
-margin: 0;
-flex-wrap: wrap;
-width: 100%;
-position: relative;
-
+// Sidebar fijo a la izquierda, columna completa
+const Sidebar = styled.nav`
+  width: 190px;
+  height: 100vh;
+  backdrop-filter: blur(6px);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
 `;
 
-// Estilos para los elementos de la lista de navegación
-const Li = styled.li`
-display: flex;
-justify-content: center;
-align-items: center;
-font-family: myFont;
+// Lista vertical de navegación
+const NavList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+`;
 
-a {
+// Ítems con enlaces
+const NavItem = styled.li`
+  width: 100%;
+
+  a {
+    display: block;
     text-decoration: none;
-    color: #FDCAE1;
-    font-size: 22px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: 2px solid white;
-    background-color: black;
-    opacity:0.7;
-    margin-left: 40px;
+    color: #FBD160;
+    font-size: 20px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    border: 2px solid;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
-        transition: 0.2s;
-        border-color: #FBD160;
-}
-}
+      border-color: #fc65a7;
+      color: #62fd62;
+      opacity: 1;
+    }
+  }
 `;
 
-
-// Contenedor para el layout
-const LayoutContainer = styled.div`
-
-flex-direction: column;
-align-items: center;
-padding-top: 60px;
-`;
-
-// Contenedor para el contenido
-const Content = styled.div`
-flex: 1;
-width: 100%;
-box-sizing: border-box;
+// Contenido principal, desplazado a la derecha del sidebar
+const Content = styled.main`
+  margin-left: 200px;
+  padding: 10px;
+  width: calc(100% - 220px);
+  overflow-y: auto;
 `;
 
 const Layout = ({ children }) => {
+  return (
+    <>
+      <GlobalStyle />
+      <BackgroundImage src={fondo} alt="Fondo" />
+      <LayoutContainer>
+        <Sidebar>
+          <NavList>
+            <NavItem><Link to="/">Home</Link></NavItem>
+            <NavItem><Link to="/art">Arte</Link></NavItem>
+            <NavItem><Link to="/proyects">Proyectos</Link></NavItem>
+            <NavItem><Link to="/#">Más</Link></NavItem>
+          </NavList>
+        </Sidebar>
+        <Content>
+          {children}
+        </Content>
+      </LayoutContainer>
+    </>
+  );
+};
 
-    Layout.propTypes = {
-        children: PropTypes.node
-    };
-
-    return (
-        <LayoutContainer>
-            <GlobalStyle />
-            <Container>
-                <Nav>
-                    <Ul>
-                        <Li><Link to="/">Home</Link></Li>
-                        <Li><Link to="/art">Arte</Link></Li>
-                        <Li><Link to="/#">Proyectos</Link></Li>
-                        <Li><Link to="/#">Más</Link></Li>
-                    </Ul>
-                </Nav>
-            </Container>
-            <Content>
-                {children}
-            </Content>
-        </LayoutContainer>
-    );
+Layout.propTypes = {
+  children: PropTypes.node
 };
 
 export default Layout;
