@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import fondo from '../assets/fondo.jpeg';
 
-// Estilos globales
 const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -32,29 +31,29 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-// Imagen de fondo estirada horizontalmente
+
 const BackgroundImage = styled.img`
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  object-fit: fill; /* Ocupa todo el ancho sin dejar bordes */
+  object-fit: fill;
   z-index: -1;
 `;
 
-// Contenedor general del layout (horizontal)
+
 const LayoutContainer = styled.div`
   display: flex;
   width: 100%;
 `;
 
-// Sidebar fijo a la izquierda, columna completa
+
 const Sidebar = styled.nav`
   width: 190px;
   height: 100vh;
   backdrop-filter: blur(6px);
-  padding: 40px 20px;
+  padding: 250px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -65,7 +64,7 @@ const Sidebar = styled.nav`
   box-shadow: 2px 0 10px rgba(0,0,0,0.05);
 `;
 
-// Lista vertical de navegación
+
 const NavList = styled.ul`
   list-style: none;
   display: flex;
@@ -74,7 +73,7 @@ const NavList = styled.ul`
   width: 100%;
 `;
 
-// Ítems con enlaces
+
 const NavItem = styled.li`
   width: 100%;
 
@@ -96,7 +95,6 @@ const NavItem = styled.li`
   }
 `;
 
-// Contenido principal, desplazado a la derecha del sidebar
 const Content = styled.main`
   margin-left: 200px;
   padding: 10px;
@@ -115,7 +113,6 @@ const Layout = ({ children }) => {
             <NavItem><Link to="/">Home</Link></NavItem>
             <NavItem><Link to="/art">Arte</Link></NavItem>
             <NavItem><Link to="/proyects">Proyectos</Link></NavItem>
-            <NavItem><Link to="/#">Más</Link></NavItem>
           </NavList>
         </Sidebar>
         <Content>

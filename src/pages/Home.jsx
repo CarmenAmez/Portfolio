@@ -24,6 +24,7 @@ const Nombre = styled.h1`
   font-size: 2.4rem;
   margin-bottom: 10px;
   color: #333;
+  align-items: flex-start;
 `;
 
 const Profesion = styled.h2`
@@ -31,6 +32,7 @@ const Profesion = styled.h2`
   font-weight: normal;
   color: #c8b3ee;
   margin-bottom: 30px;
+  align-items: end;
 `;
 
 const SobreMi = styled.p`
@@ -66,11 +68,10 @@ const Boton = styled.a`
 const Home = () => {
     return (
         <Layout>
-        <HomeContainer>            
             <Nombre>Carmen Sas Amez</Nombre>
             <Profesion>Programadora Frontend · Diseñadora UX/UI</Profesion>
             <Foto src={perfil} alt="Foto de Carmen" />
-
+<HomeContainer>   
             <SobreMi>
                 A lo largo de mi trayectoria he aprendido que adaptarse no es solo cambiar, sino también escuchar, entender y aportar. Me considero una persona empática, con la capacidad de ponerme en el lugar del otro para construir relaciones de trabajo sanas y efectivas. Disfruto creando ideas, buscando soluciones distintas y aprendiendo constantemente, porque creo que todo desafío es una oportunidad de crecer. He trabajado con equipos muy diversos y eso me ha llevado a desarrollar un liderazgo situacional: saber cuándo guiar, cuándo apoyar y cuándo dejar que otros brillen. Valoro mucho el trabajo en equipo, la creatividad compartida y el aprendizaje continuo como motores reales de cualquier proyecto.
             </SobreMi>
