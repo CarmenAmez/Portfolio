@@ -1,14 +1,97 @@
-// src/pages/Home.jsx
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { useState, useEffect } from "react";
 import perfil from "../assets/burn.png";
 import Layout from "../components/Layout";
 
+const frases = [
+  "Adaptarse no es solo cambiar, sino también escuchar, entender y aportar.",
+  "Soy una persona empática, capaz de ponerme en el lugar del otro para construir relaciones de trabajo sanas y efectivas.",
+  "Disfruto creando ideas, buscando soluciones distintas y aprendiendo constantemente.",
+  "Creo que todo desafío es una oportunidad para crecer.",
+  "He trabajado con equipos muy diversos y he desarrollado un liderazgo situacional: saber cuándo guiar, cuándo apoyar y cuándo dejar que otros brillen.",
+  "Valoro el trabajo en equipo, la creatividad compartida y el aprendizaje continuo como motores reales de cualquier proyecto.",
+];
+
+// ANIMACIÓN DE FONDO - blobs chill
+const mover = keyframes`
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -10px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+`;
+
+// Estilos generales
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 60px 20px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+`;
+
+const FondoAnimado = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 300px;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+
+  div {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: ${mover} 8s ease-in-out infinite alternate;
+    transition: transform 1s ease-in-out;
+  }
+
+  .blob1 {
+    width: 160px;
+    height: 160px;
+    background-color: #ffd1dc;
+    top: 30px;
+    left: -60px;
+  }
+
+  .blob2 {
+    width: 180px;
+    height: 180px;
+    background-color: #c8b3ee;
+    top: 140px;
+    left: 550px;
+    animation-delay: 4s;
+  }
+
+  .blob3 {
+    width: 140px;
+    height: 140px;
+    background-color: #fbd160;
+    top: 200px;
+    left: 100px;
+    animation-delay: 2s;
+  }
+
+    .blob4 {
+    width: 150px;
+    height: 150px;
+    background-color: #CAF1CA;
+    top: 20px;
+    left: 600px;
+  }
+`;
+
+
+
+const Presentacion = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 40px;
+  z-index: 1;
 `;
 
 const Foto = styled.img`
@@ -17,42 +100,68 @@ const Foto = styled.img`
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #fdcae1;
-  margin-bottom: 20px;
+`;
+
+const InfoTexto = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 `;
 
 const Nombre = styled.h1`
-  font-size: 2.4rem;
-  margin-bottom: 10px;
+  font-size: 3.6rem;
+  margin: 0 0 10px 0;
   color: #333;
-  align-items: flex-start;
 `;
 
 const Profesion = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: normal;
   color: #c8b3ee;
-  margin-bottom: 30px;
-  align-items: end;
 `;
 
-const SobreMi = styled.p`
-  max-width: 900px;
-  font-size: 1.1rem;
-  color: #444;
+const Carrusel = styled.div`
+  max-width: 800px;
+  min-height: 120px;
   margin-bottom: 40px;
-  background: rgba(255, 255, 255, 0.5);
-  padding: 20px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 30px;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+  transition: all 0.5s ease-in-out;
+  font-size: 1.2rem;
+  color: #333;
+`;
+
+const Controles = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+`;
+
+const Punto = styled.button`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${({ $activo }) => ($activo ? "#fbd160" : "#eee")};
+  cursor: pointer;
+  transition: background 0.3s;
 `;
 
 const Botonera = styled.div`
   display: flex;
   gap: 20px;
+  z-index: 1;
+  margin-top: 100px;
 `;
 
 const Boton = styled.a`
   background-color: #fbd160;
-  color: black;
+  color: #7d6931;
   padding: 12px 20px;
   border-radius: 10px;
   text-decoration: none;
@@ -66,23 +175,47 @@ const Boton = styled.a`
 `;
 
 const Home = () => {
-    return (
-        <Layout>
+  const [indice, setIndice] = useState(0);
+
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setIndice(i => (i + 1) % frases.length);
+    }, 6000); // Cambia cada 6 segundos
+    return () => clearInterval(intervalo);
+  }, []);
+
+  return (
+    <Layout>
+      <HomeContainer>
+
+        <Presentacion>
+          <Foto src={perfil} alt="Foto de Carmen" />
+          <InfoTexto>
             <Nombre>Carmen Sas Amez</Nombre>
             <Profesion>Programadora Frontend · Diseñadora UX/UI</Profesion>
-            <Foto src={perfil} alt="Foto de Carmen" />
-<HomeContainer>   
-            <SobreMi>
-                A lo largo de mi trayectoria he aprendido que adaptarse no es solo cambiar, sino también escuchar, entender y aportar. Me considero una persona empática, con la capacidad de ponerme en el lugar del otro para construir relaciones de trabajo sanas y efectivas. Disfruto creando ideas, buscando soluciones distintas y aprendiendo constantemente, porque creo que todo desafío es una oportunidad de crecer. He trabajado con equipos muy diversos y eso me ha llevado a desarrollar un liderazgo situacional: saber cuándo guiar, cuándo apoyar y cuándo dejar que otros brillen. Valoro mucho el trabajo en equipo, la creatividad compartida y el aprendizaje continuo como motores reales de cualquier proyecto.
-            </SobreMi>
-            <Botonera>
-                <Boton href="https://www.linkedin.com/in/carmenamez" target="_blank" rel="noopener noreferrer">LinkedIn</Boton>
-                <Boton href="https://github.com/CarmenAmez" target="_blank" rel="noopener noreferrer">GitHub</Boton>
-                <Boton href="/cv.pdf" target="_blank" rel="noopener noreferrer">Ver CV</Boton>
-            </Botonera>
-        </HomeContainer>
-        </Layout>
-    );
+          </InfoTexto>
+        </Presentacion>
+
+        <Carrusel>{frases[indice]}</Carrusel>
+                <FondoAnimado>
+          <div className="blob1" />
+          <div className="blob2" />
+          <div className="blob3" />
+          <div className="blob4" />
+        </FondoAnimado>
+        <Controles>
+          {frases.map((_, i) => (
+            <Punto key={i} onClick={() => setIndice(i)} $activo={i === indice} />
+          ))}
+        </Controles>
+        <Botonera>
+          <Boton href="https://www.linkedin.com/in/carmenamez" target="_blank" rel="noopener noreferrer">LinkedIn</Boton>
+          <Boton href="https://github.com/CarmenAmez" target="_blank" rel="noopener noreferrer">GitHub</Boton>
+          <Boton href="/cv.pdf" target="_blank" rel="noopener noreferrer">Ver CV</Boton>
+        </Botonera>
+      </HomeContainer>
+    </Layout>
+  );
 };
 
 export default Home;

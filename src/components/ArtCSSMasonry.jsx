@@ -84,9 +84,8 @@ const FullscreenOverlay = styled.div`
 const FullscreenImg = styled.img`
   max-width: 90vw;
   max-height: 80vh;
-  background: #fff;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
   margin-bottom: 1rem;
+  padding-top:70px;
 `;
 
 const CloseButton = styled.button`
@@ -206,7 +205,7 @@ const ArtCSSMasonry = ({ images }) => {
 
     const scrollThumbnails = (direction) => {
         if (thumbnailRef.current) {
-            const scrollAmount = 200; // píxeles por clic
+            const scrollAmount = 200;
             thumbnailRef.current.scrollBy({
                 left: direction * scrollAmount,
                 behavior: 'smooth',
@@ -226,7 +225,6 @@ const ArtCSSMasonry = ({ images }) => {
                     <FullscreenCaption>{images[selectedIndex].title}</FullscreenCaption>
                     <ThumbnailWrapper onClick={(e) => e.stopPropagation()}>
                         <ArrowButton onClick={() => scrollThumbnails(-1)}>‹</ArrowButton>
-
                         <ThumbnailRow ref={thumbnailRef}>
                             {images.map((img, idx) => (
                                 <Thumbnail
@@ -238,7 +236,6 @@ const ArtCSSMasonry = ({ images }) => {
                                 />
                             ))}
                         </ThumbnailRow>
-
                         <ArrowButton onClick={() => scrollThumbnails(1)}>›</ArrowButton>
                     </ThumbnailWrapper>
                     <ThumbnailRow onClick={(e) => e.stopPropagation()}>
