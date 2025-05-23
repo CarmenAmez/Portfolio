@@ -30,7 +30,7 @@ src/
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/portfolio-carmen.git
+   git clone https://github.com/CarmenAmez/Portfolio.git
 
 ## 🌐 Enlace en vivo
 Ver portfolio online
