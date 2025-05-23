@@ -12,11 +12,11 @@ Bienvenid@ a mi portfolio web, una ventana digital donde muestro mi trabajo como
 ## 🎨 Estructura del proyecto
 
 src/
-├── assets/ # Ilustraciones y recursos gráficos
-├── components/ # Componentes reutilizables (layout, carrusel, modales)
-├── pages/ # Páginas principales: Home, Art, Projects, etc.
-├── styled/ # Estilos con styled-components
-└── App.jsx # Rutas y estructura general
+- assets/ # Ilustraciones y recursos gráficos
+- components/ # Componentes reutilizables (layout, carrusel, modales)
+- pages/ # Páginas principales: Home, Art, Projects, etc.
+- styled/ # Estilos con styled-components
+- App.jsx # Rutas y estructura general
 
 
 ## ✨ Características del sitio
