@@ -7,6 +7,10 @@ import imagenFinal3 from '../../assets/neonsulphur/circulo.jpg';
 import imagenFinal4 from '../../assets/neonsulphur/circulo2.jpg';
 import imagenFinal5 from '../../assets/neonsulphur/ciervo.jpg';
 import imagenFinal6 from '../../assets/neonsulphur/luna.jpg';
+import merch1 from '../../assets/neonsulphur/neon.png';
+import merch2 from '../../assets/neonsulphur/music.png';
+import merch3 from '../../assets/neonsulphur/merch.jpeg';
+
 
 const Container = styled.div`
   padding: 40px 20px;
@@ -52,7 +56,7 @@ const ImagePairWrapper = styled.div`
 
 const PairTitle = styled.h3`
   color: #c8b3ee;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 10px;
 `;
 
@@ -131,14 +135,29 @@ const BotonFlecha = styled.button`
   }
 `;
 
+const MerchImageGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+`;
+
+const MerchImage = styled.img`
+  width: 60%;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+`;
+
 const FlechaIzquierda = styled(BotonFlecha)` left: 20px; `;
 const FlechaDerecha = styled(BotonFlecha)` right: 20px; `;
 
 const Proyecto1 = () => {
   const grupos = [
-    { titulo: 'Calavera y Cuervo', imagenes: [imagenFinal1, imagenFinal2] },
-    { titulo: 'Sello Alquímico I y II', imagenes: [imagenFinal3, imagenFinal4] },
-    { titulo: 'Ciervo y Luna', imagenes: [imagenFinal5, imagenFinal6] },
+    { titulo: 'Time', imagenes: [imagenFinal1, imagenFinal2] },
+    { titulo: 'Alchemic Seal I y II', imagenes: [imagenFinal3, imagenFinal4] },
+    { titulo: 'Earth and Sky', imagenes: [imagenFinal5, imagenFinal6] },
   ];
 
   const [indiceActivo, setIndiceActivo] = useState(null);
@@ -194,18 +213,25 @@ const Proyecto1 = () => {
           ))}
         </Section>
 
-        <Section>
-          <h3>Aplicación en merchandising</h3>
-          <Paragraph>Las ilustraciones se usaron para láminas impresas en A4, posters promocionales y packaging del EP.</Paragraph>
-        </Section>
+<Section>
+  <h3>Aplicación en merchandising</h3>
+  <Paragraph>Las ilustraciones se usaron para láminas impresas en A4, posters promocionales y packaging del EP.</Paragraph>
+  
+  <MerchImageGrid>
+    <MerchImage src={merch1} alt="Merchandising 1" />
+    <MerchImage src={merch2} alt="Merchandising 2" />
+    <MerchImage src={merch3} alt="Merchandising 3" />
+  </MerchImageGrid>
+</Section>
 
         <Section>
           <h3>Escucha el EP</h3>
           <Paragraph>Disponible en las principales plataformas:</Paragraph>
           <MusicLinks>
-            <MusicButton href="#" target="_blank">Spotify</MusicButton>
-            <MusicButton href="#" target="_blank">Apple Music</MusicButton>
-            <MusicButton href="#" target="_blank">SoundCloud</MusicButton>
+            <MusicButton href="https://open.spotify.com/intl-es/artist/685k85UfGECXP5J36F6MpE" target="_blank">Spotify</MusicButton>
+            <MusicButton href="https://music.apple.com/us/artist/neon-sulphur/1543536442" target="_blank">Apple Music</MusicButton>
+            <MusicButton href="https://soundcloud.com/neonsulphur" target="_blank">SoundCloud</MusicButton>
+            <MusicButton href="https://www.amazon.com/-/es/Neon-Sulphur/dp/B08XC5WWHN" target="_blank">Amazon Music</MusicButton>
           </MusicLinks>
         </Section>
 

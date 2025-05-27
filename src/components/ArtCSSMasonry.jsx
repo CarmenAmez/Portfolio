@@ -19,11 +19,12 @@ const ArtGrid = styled.div`
   }
 
   @media (max-width: 700px) {
-    column-count: 2;
+    column-count: 3;
   }
 
   @media (max-width: 500px) {
-    column-count: 1;
+    column-count: 3;
+    padding: 1rem;
   }
 `;
 
@@ -85,7 +86,7 @@ const FullscreenImg = styled.img`
   max-width: 90vw;
   max-height: 80vh;
   margin-bottom: 1rem;
-  padding-top:70px;
+  padding-top: 70px;
 `;
 
 const CloseButton = styled.button`
@@ -157,6 +158,7 @@ const Thumbnail = styled.img`
     box-shadow: 0 0 8px white;
   }
 `;
+
 const ThumbnailWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -189,97 +191,78 @@ const ArrowButton = styled.button`
 `;
 
 const ArtCSSMasonry = ({ images }) => {
-    const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const thumbnailRef = useRef();
 
-    const closeViewer = () => setSelectedIndex(null);
+  const closeViewer = () => setSelectedIndex(null);
+  const showPrev = () => setSelectedIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  const showNext = () => setSelectedIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
 
-    const showPrev = () => {
-        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
-    };
+  const scrollThumbnails = (direction) => {
+    if (thumbnailRef.current) {
+      thumbnailRef.current.scrollBy({
+        left: direction * 200,
+        behavior: 'smooth',
+      });
+    }
+  };
 
-    const showNext = () => {
-        setSelectedIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
-    };
+  return (
+    <>
+      {selectedIndex !== null && (
+        <FullscreenOverlay onClick={closeViewer}>
+          <FullscreenImg
+            src={images[selectedIndex].src}
+            alt={images[selectedIndex].title || `art-${selectedIndex}`}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <FullscreenCaption>{images[selectedIndex].title}</FullscreenCaption>
+          <ThumbnailWrapper onClick={(e) => e.stopPropagation()}>
+            <ArrowButton onClick={() => scrollThumbnails(-1)}>‹</ArrowButton>
+            <ThumbnailRow ref={thumbnailRef}>
+              {images.map((img, idx) => (
+                <Thumbnail
+                  key={idx}
+                  src={img.src}
+                  alt={img.title}
+                  className={idx === selectedIndex ? 'active' : ''}
+                  onClick={() => setSelectedIndex(idx)}
+                />
+              ))}
+            </ThumbnailRow>
+            <ArrowButton onClick={() => scrollThumbnails(1)}>›</ArrowButton>
+          </ThumbnailWrapper>
+          <CloseButton onClick={closeViewer}>✕</CloseButton>
+          <NavButton direction="left" onClick={(e) => { e.stopPropagation(); showPrev(); }}>
+            ←
+          </NavButton>
+          <NavButton direction="right" onClick={(e) => { e.stopPropagation(); showNext(); }}>
+            →
+          </NavButton>
+        </FullscreenOverlay>
+      )}
 
-    const thumbnailRef = useRef();
-
-    const scrollThumbnails = (direction) => {
-        if (thumbnailRef.current) {
-            const scrollAmount = 200;
-            thumbnailRef.current.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth',
-            });
-        }
-    };
-
-    return (
-        <>
-            {selectedIndex !== null && (
-                <FullscreenOverlay onClick={closeViewer}>
-                    <FullscreenImg
-                        src={images[selectedIndex].src}
-                        alt={images[selectedIndex].title || `art-${selectedIndex}`}
-                        onClick={(e) => e.stopPropagation()}
-                    />
-                    <FullscreenCaption>{images[selectedIndex].title}</FullscreenCaption>
-                    <ThumbnailWrapper onClick={(e) => e.stopPropagation()}>
-                        <ArrowButton onClick={() => scrollThumbnails(-1)}>‹</ArrowButton>
-                        <ThumbnailRow ref={thumbnailRef}>
-                            {images.map((img, idx) => (
-                                <Thumbnail
-                                    key={idx}
-                                    src={img.src}
-                                    alt={img.title}
-                                    className={idx === selectedIndex ? 'active' : ''}
-                                    onClick={() => setSelectedIndex(idx)}
-                                />
-                            ))}
-                        </ThumbnailRow>
-                        <ArrowButton onClick={() => scrollThumbnails(1)}>›</ArrowButton>
-                    </ThumbnailWrapper>
-                    <ThumbnailRow onClick={(e) => e.stopPropagation()}>
-                        {images.map((img, idx) => (
-                            <Thumbnail
-                                key={idx}
-                                src={img.src}
-                                alt={img.title}
-                                className={idx === selectedIndex ? 'active' : ''}
-                                onClick={() => setSelectedIndex(idx)}
-                            />
-                        ))}
-                    </ThumbnailRow>
-                    <CloseButton onClick={closeViewer}>✕</CloseButton>
-                    <NavButton direction="left" onClick={(e) => { e.stopPropagation(); showPrev(); }}>
-                        ←
-                    </NavButton>
-                    <NavButton direction="right" onClick={(e) => { e.stopPropagation(); showNext(); }}>
-                        →
-                    </NavButton>
-                </FullscreenOverlay>
-            )}
-
-            <ArtGrid className={selectedIndex !== null ? 'blurred' : ''}>
-                {images.map((image, index) => (
-                    <ArtCardWrapper key={index} onClick={() => setSelectedIndex(index)}>
-                        <ArtCardImg src={image.src} alt={image.title || `art-${index}`} loading="lazy" />
-                        <HoverOverlay className="hover-overlay">
-                            <OverlayText>{image.title}</OverlayText>
-                        </HoverOverlay>
-                    </ArtCardWrapper>
-                ))}
-            </ArtGrid>
-        </>
-    );
+      <ArtGrid className={selectedIndex !== null ? 'blurred' : ''}>
+        {images.map((image, index) => (
+          <ArtCardWrapper key={index} onClick={() => setSelectedIndex(index)}>
+            <ArtCardImg src={image.src} alt={image.title || `art-${index}`} loading="lazy" />
+            <HoverOverlay className="hover-overlay">
+              <OverlayText>{image.title}</OverlayText>
+            </HoverOverlay>
+          </ArtCardWrapper>
+        ))}
+      </ArtGrid>
+    </>
+  );
 };
 
 ArtCSSMasonry.propTypes = {
-    images: PropTypes.arrayOf(
-        PropTypes.shape({
-            src: PropTypes.string.isRequired,
-            title: PropTypes.string,
-        })
-    ).isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      title: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default ArtCSSMasonry;

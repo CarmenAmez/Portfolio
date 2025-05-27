@@ -31,7 +31,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-
 const BackgroundImage = styled.img`
   position: fixed;
   top: 0;
@@ -42,12 +41,14 @@ const BackgroundImage = styled.img`
   z-index: -1;
 `;
 
-
 const LayoutContainer = styled.div`
   display: flex;
   width: 100%;
-`;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
 
 const Sidebar = styled.nav`
   width: 190px;
@@ -62,8 +63,21 @@ const Sidebar = styled.nav`
   top: 0;
   z-index: 1000;
   box-shadow: 2px 0 10px rgba(0,0,0,0.05);
-`;
+  background-color: rgba(255, 255, 255, 0.1);
 
+  @media (max-width: 768px) {
+    width: 100vw;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+`;
 
 const NavList = styled.ul`
   list-style: none;
@@ -71,8 +85,14 @@ const NavList = styled.ul`
   flex-direction: column;
   gap: 30px;
   width: 100%;
-`;
 
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    width: auto;
+  }
+`;
 
 const NavItem = styled.li`
   width: 100%;
@@ -92,6 +112,11 @@ const NavItem = styled.li`
       color: #62fd62;
       opacity: 1;
     }
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+      padding: 8px 12px;
+    }
   }
 `;
 
@@ -100,6 +125,12 @@ const Content = styled.main`
   padding: 10px;
   width: calc(100% - 220px);
   overflow-y: auto;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 80px;
+    width: 100%;
+  }
 `;
 
 const Layout = ({ children }) => {

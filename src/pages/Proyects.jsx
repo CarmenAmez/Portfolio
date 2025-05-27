@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import ejemploImg from '../assets/neonsulphur/calabera.jpg';
-import ejemploImg2 from '../assets/quimera.png';
+import ejemploImg2 from '../assets/peluqueria/LogoPelu.png';
 import ejemploImg3 from '../assets/taim.png';
 import ejemploImg4 from '../assets/planeo.png';
 
@@ -114,7 +114,7 @@ const Proyects = () => {
           <Card to="/proyectos/proyecto2">
             <CardImage src={ejemploImg2} alt="Proyecto 2" />
             <CardContent>
-              <CardTitle>Branding y merchandising para el IES Les Salines</CardTitle>
+              <CardTitle>A 180 Grados</CardTitle>
               <CardText>Diseño de logotipo e ilustración para el la peluquería y el proyecto final del CFGM de Peluquería y Cosmética Capilar.</CardText>
               <TagContainer>
                 <Tag>Procreate</Tag>
@@ -125,7 +125,7 @@ const Proyects = () => {
             <Card to="/proyectos/proyecto3">
             <CardImage src={ejemploImg3} alt="Proyecto 3" />
             <CardContent>
-              <CardTitle>Taim - Tiempo Acumulado de Intercambio Mutuo</CardTitle>
+              <CardTitle>TAIM</CardTitle>
               <CardText>Proyecto final de Bootcamp: diseño y desarrollo de la web TAIM, un banco de tiempo para el intercambio de talentos.</CardText>
               <TagContainer>
                 <Tag>Diseño UX/UI</Tag>

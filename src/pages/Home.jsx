@@ -19,7 +19,6 @@ const mover = keyframes`
   100% { transform: translate(0, 0) scale(1); }
 `;
 
-// Estilos generales
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -40,6 +39,12 @@ const FondoAnimado = styled.div`
   z-index: 0;
   pointer-events: none;
 
+  @media (max-width: 768px) {
+    width: 90vw;
+    height: 240px;
+    top: 40%;
+  }
+
   div {
     position: absolute;
     border-radius: 50%;
@@ -54,6 +59,13 @@ const FondoAnimado = styled.div`
     background-color: #ffd1dc;
     top: 30px;
     left: -60px;
+
+    @media (max-width: 768px) {
+    width: 100px;
+    height: 100px;
+    top: 10px;
+    left: 0;
+    }
   }
 
   .blob2 {
@@ -63,6 +75,14 @@ const FondoAnimado = styled.div`
     top: 140px;
     left: 550px;
     animation-delay: 4s;
+
+    @media (max-width: 768px) {
+      width: 140px;
+      height: 140px;
+      top: 160px;
+      left: auto;
+      right: 0;
+    }
   }
 
   .blob3 {
@@ -72,17 +92,31 @@ const FondoAnimado = styled.div`
     top: 200px;
     left: 100px;
     animation-delay: 2s;
+
+    @media (max-width: 768px) {
+      width: 140px;
+      height: 140px;
+      top: 130px;
+      left: 30px;
+    }
   }
 
-    .blob4 {
+  .blob4 {
     width: 150px;
     height: 150px;
     background-color: #CAF1CA;
     top: 20px;
     left: 600px;
+
+    @media (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+      top: 40px;
+      left: auto;
+      right: 40px;
+    }
   }
 `;
-
 
 
 const Presentacion = styled.div`
@@ -92,6 +126,18 @@ const Presentacion = styled.div`
   gap: 60px;
   margin-bottom: 40px;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+`;
+
+const ContenedorFoto = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Foto = styled.img`
@@ -113,12 +159,20 @@ const Nombre = styled.h1`
   font-size: 3.6rem;
   margin: 0 0 10px 0;
   color: #333;
+
+  @media (max-width: 480px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const Profesion = styled.h2`
   font-size: 1.6rem;
   font-weight: normal;
   color: #c8b3ee;
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Carrusel = styled.div`
@@ -157,6 +211,11 @@ const Botonera = styled.div`
   gap: 20px;
   z-index: 1;
   margin-top: 100px;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const Boton = styled.a`
@@ -166,7 +225,7 @@ const Boton = styled.a`
   border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
 
   &:hover {
@@ -187,9 +246,10 @@ const Home = () => {
   return (
     <Layout>
       <HomeContainer>
-
         <Presentacion>
-          <Foto src={perfil} alt="Foto de Carmen" />
+          <ContenedorFoto>
+            <Foto src={perfil} alt="Foto de Carmen" />
+          </ContenedorFoto>
           <InfoTexto>
             <Nombre>Carmen Sas Amez</Nombre>
             <Profesion>Programadora Frontend · Diseñadora UX/UI</Profesion>
@@ -197,17 +257,20 @@ const Home = () => {
         </Presentacion>
 
         <Carrusel>{frases[indice]}</Carrusel>
-                <FondoAnimado>
+
+        <FondoAnimado>
           <div className="blob1" />
           <div className="blob2" />
           <div className="blob3" />
           <div className="blob4" />
         </FondoAnimado>
+
         <Controles>
           {frases.map((_, i) => (
             <Punto key={i} onClick={() => setIndice(i)} $activo={i === indice} />
           ))}
         </Controles>
+
         <Botonera>
           <Boton href="https://www.linkedin.com/in/carmenamez" target="_blank" rel="noopener noreferrer">LinkedIn</Boton>
           <Boton href="https://github.com/CarmenAmez" target="_blank" rel="noopener noreferrer">GitHub</Boton>
