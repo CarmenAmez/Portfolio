@@ -61,10 +61,10 @@ const FondoAnimado = styled.div`
     left: -60px;
 
     @media (max-width: 768px) {
-    width: 100px;
-    height: 100px;
-    top: 10px;
-    left: 0;
+      width: 100px;
+      height: 100px;
+      top: 10px;
+      left: 0;
     }
   }
 
@@ -117,7 +117,6 @@ const FondoAnimado = styled.div`
     }
   }
 `;
-
 
 const Presentacion = styled.div`
   display: flex;
@@ -235,13 +234,38 @@ const Boton = styled.a`
 
 const Home = () => {
   const [indice, setIndice] = useState(0);
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
 
   useEffect(() => {
     const intervalo = setInterval(() => {
       setIndice(i => (i + 1) % frases.length);
-    }, 6000); // Cambia cada 6 segundos
+    }, 6000);
     return () => clearInterval(intervalo);
   }, []);
+
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX || !touchEndX) return;
+
+    const distancia = touchStartX - touchEndX;
+
+    if (distancia > 50) {
+      setIndice((prev) => (prev + 1) % frases.length); // Swipe izquierda
+    } else if (distancia < -50) {
+      setIndice((prev) => (prev - 1 + frases.length) % frases.length); // Swipe derecha
+    }
+
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
 
   return (
     <Layout>
@@ -256,7 +280,13 @@ const Home = () => {
           </InfoTexto>
         </Presentacion>
 
-        <Carrusel>{frases[indice]}</Carrusel>
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <Carrusel>{frases[indice]}</Carrusel>
+        </div>
 
         <FondoAnimado>
           <div className="blob1" />
