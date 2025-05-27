@@ -34,4 +34,4 @@ src/
 
 ## 🌐 Enlace en vivo
 Ver portfolio online
-(⚠️ No disponible aun)
+(https://portfolio-gold-nu-18.vercel.app/)

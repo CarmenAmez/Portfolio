@@ -45,15 +45,27 @@ const Quote = styled.blockquote`
   margin: 20px 0;
 `;
 
-const ImageGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+const ImagePairWrapper = styled.div`
+  margin: 30px 0;
+  text-align: center;
+`;
+
+const PairTitle = styled.h3`
+  color: #c8b3ee;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+`;
+
+const ImageRow = styled.div`
+  display: flex;
+  justify-content: center;
   gap: 20px;
-  margin-top: 20px;
+  flex-wrap: wrap;
 `;
 
 const Image = styled.img`
   width: 100%;
+  max-width: 300px;
   border-radius: 10px;
   object-fit: cover;
   cursor: pointer;
@@ -86,19 +98,23 @@ const ModalFondo = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.85);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 9999;
 `;
 
 const ImagenAmpliada = styled.img`
   max-width: 90vw;
-  max-height: 90vh;
+  max-height: 80vh;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  margin-bottom: 10px;
 `;
 
-// Al final del mismo archivo Proyecto1.jsx
+const ImageLabel = styled.span`
+  color: white;
+`;
 
 const BotonFlecha = styled.button`
   position: absolute;
@@ -110,42 +126,35 @@ const BotonFlecha = styled.button`
   font-size: 3rem;
   cursor: pointer;
   z-index: 1001;
-
   &:hover {
     color: #c8b3ee;
   }
 `;
 
-const FlechaIzquierda = styled(BotonFlecha)`
-  left: 20px;
-`;
-
-const FlechaDerecha = styled(BotonFlecha)`
-  right: 20px;
-`;
+const FlechaIzquierda = styled(BotonFlecha)` left: 20px; `;
+const FlechaDerecha = styled(BotonFlecha)` right: 20px; `;
 
 const Proyecto1 = () => {
-  const imagenes = [
-    imagenFinal1,
-    imagenFinal2,
-    imagenFinal3,
-    imagenFinal4,
-    imagenFinal5,
-    imagenFinal6
+  const grupos = [
+    { titulo: 'Calavera y Cuervo', imagenes: [imagenFinal1, imagenFinal2] },
+    { titulo: 'Sello Alquímico I y II', imagenes: [imagenFinal3, imagenFinal4] },
+    { titulo: 'Ciervo y Luna', imagenes: [imagenFinal5, imagenFinal6] },
   ];
 
   const [indiceActivo, setIndiceActivo] = useState(null);
+  const imagenesPlanas = grupos.flatMap(grupo => grupo.imagenes);
+
   const abrirModal = (index) => setIndiceActivo(index);
   const cerrarModal = () => setIndiceActivo(null);
 
   const mostrarAnterior = (e) => {
     e.stopPropagation();
-    setIndiceActivo((prev) => (prev === 0 ? imagenes.length - 1 : prev - 1));
+    setIndiceActivo((prev) => (prev === 0 ? imagenesPlanas.length - 1 : prev - 1));
   };
 
   const mostrarSiguiente = (e) => {
     e.stopPropagation();
-    setIndiceActivo((prev) => (prev === imagenes.length - 1 ? 0 : prev + 1));
+    setIndiceActivo((prev) => (prev === imagenesPlanas.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -166,12 +175,23 @@ const Proyecto1 = () => {
 
         <Section>
           <h3>Concepto y dirección artística</h3>
-          <Paragraph>El imaginario visual se basa en una fusión de símbolos alquímicos, estética japonesa futurista, colores neón y elementos de ciencia retrofuturista. Aquí se muestran algunos bocetos, referencias e ilustraciones finales:</Paragraph>
-          <ImageGrid>
-            {imagenes.map((img, index) => (
-              <Image key={index} src={img} alt={`Ilustración final ${index + 1}`} onClick={() => abrirModal(index)} />
-            ))}
-          </ImageGrid>
+          <Paragraph>El imaginario visual se basa en una fusión de símbolos alquímicos, estética japonesa futurista, colores neón y elementos de ciencia retrofuturista.</Paragraph>
+
+          {grupos.map((grupo, grupoIndex) => (
+            <ImagePairWrapper key={grupoIndex}>
+              <PairTitle>{grupo.titulo}</PairTitle>
+              <ImageRow>
+                {grupo.imagenes.map((img, i) => (
+                  <Image
+                    key={i}
+                    src={img}
+                    alt={`${grupo.titulo} - imagen ${i + 1}`}
+                    onClick={() => abrirModal(grupoIndex * 2 + i)}
+                  />
+                ))}
+              </ImageRow>
+            </ImagePairWrapper>
+          ))}
         </Section>
 
         <Section>
@@ -190,9 +210,13 @@ const Proyecto1 = () => {
         </Section>
 
         {indiceActivo !== null && (
-          <ModalFondo onClick={cerrarModal} style={{ zIndex: 9999 }}>
+          <ModalFondo onClick={cerrarModal}>
             <FlechaIzquierda onClick={mostrarAnterior}>&lt;</FlechaIzquierda>
-            <ImagenAmpliada src={imagenes[indiceActivo]} alt={`Vista ampliada ${indiceActivo + 1}`} />
+            <ImagenAmpliada src={imagenesPlanas[indiceActivo]} />
+            <ImageLabel>
+              <strong>{grupos[Math.floor(indiceActivo / 2)].titulo}</strong><br />
+              {imagenesPlanas[indiceActivo].split('/').pop().replace(/\.[^/.]+$/, '')}
+            </ImageLabel>
             <FlechaDerecha onClick={mostrarSiguiente}>&gt;</FlechaDerecha>
           </ModalFondo>
         )}
