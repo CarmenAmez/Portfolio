@@ -141,7 +141,7 @@ const Layout = ({ children }) => {
       <LayoutContainer>
         <Sidebar>
           <NavList>
-            <NavItem><Link to="/">Home</Link></NavItem>
+            <NavItem><Link to="/">Inicio</Link></NavItem>
             <NavItem><Link to="/art">Arte</Link></NavItem>
             <NavItem><Link to="/proyects">Proyectos</Link></NavItem>
           </NavList>

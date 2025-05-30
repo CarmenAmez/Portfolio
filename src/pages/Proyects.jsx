@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import ejemploImg from '../assets/neonsulphur/calabera.jpg';
 import ejemploImg2 from '../assets/peluqueria/LogoPelu.png';
-import ejemploImg3 from '../assets/taim.png';
-import ejemploImg4 from '../assets/planeo.png';
+import ejemploImg3 from '../assets/taim/taim.png';
+import ejemploImg4 from '../assets/planeo/planeo.png';
 
 
 const Container = styled.div`
@@ -115,7 +115,7 @@ const Proyects = () => {
             <CardImage src={ejemploImg2} alt="Proyecto 2" />
             <CardContent>
               <CardTitle>A 180 Grados</CardTitle>
-              <CardText>Diseño de logotipo e ilustración para el la peluquería y el proyecto final del CFGM de Peluquería y Cosmética Capilar.</CardText>
+              <CardText>Diseño de logotipo para la peluquería del CFGM de Peluquería y Cosmética Capilar IES Les Salines.</CardText>
               <TagContainer>
                 <Tag>Procreate</Tag>
               </TagContainer>
