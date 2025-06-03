@@ -99,7 +99,7 @@ const Proyects = () => {
         <Title>Proyectos</Title>
         <Subtitle>Aquí puedes ver algunos de mis proyectos más destacados.</Subtitle>
         <CardGrid>
-          <Card to="/proyectos/proyecto1">
+          <Card to="/proyects/proyecto1">
             <CardImage src={ejemploImg} alt="Proyecto 1" />
             <CardContent>
               <CardTitle>Neon Sulphur</CardTitle>
@@ -111,7 +111,7 @@ const Proyects = () => {
             </CardContent>
           </Card>
 
-          <Card to="/proyectos/proyecto2">
+          <Card to="/proyects/proyecto2">
             <CardImage src={ejemploImg2} alt="Proyecto 2" />
             <CardContent>
               <CardTitle>A 180 Grados</CardTitle>
@@ -122,7 +122,7 @@ const Proyects = () => {
             </CardContent>
           </Card>
 
-            <Card to="/proyectos/proyecto3">
+            <Card to="/proyects/proyecto3">
             <CardImage src={ejemploImg3} alt="Proyecto 3" />
             <CardContent>
               <CardTitle>TAIM</CardTitle>
@@ -135,7 +135,7 @@ const Proyects = () => {
             </CardContent>
           </Card>
 
-            <Card to="/proyectos/proyecto4">
+            <Card to="/proyects/proyecto4">
             <CardImage src={ejemploImg4} alt="Proyecto 4" />
             <CardContent>
               <CardTitle>Planeo</CardTitle>

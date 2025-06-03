@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
 import fondo from '../assets/fondo.jpeg';
@@ -94,30 +94,35 @@ const NavList = styled.ul`
   }
 `;
 
+const StyledLink = styled(Link).withConfig({
+  shouldForwardProp: (prop) => prop !== 'isActive'
+})`
+  display: block;
+  text-decoration: none;
+  color: ${({ isActive }) => (isActive ? '#7a3593' : '#7C5DFA')};
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-color: ${({ isActive }) => (isActive ? '#EDEAFF' : 'transparent')};
+  font-weight: ${({ isActive }) => (isActive ? 'bold' : 'normal')};
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    border-color: #7a3593;
+    color: #7a3593;
+    background-color: #F5F1FF;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    padding: 8px 12px;
+  }
+`;
+
+
 const NavItem = styled.li`
   width: 100%;
-
-  a {
-    display: block;
-    text-decoration: none;
-    color: #FBD160;
-    font-size: 20px;
-    padding: 10px 10px;
-    border-radius: 10px;
-    border: 2px solid;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      border-color: #fc65a7;
-      color: #62fd62;
-      opacity: 1;
-    }
-
-    @media (max-width: 768px) {
-      font-size: 18px;
-      padding: 8px 12px;
-    }
-  }
 `;
 
 const Content = styled.main`
@@ -134,6 +139,8 @@ const Content = styled.main`
 `;
 
 const Layout = ({ children }) => {
+  const location = useLocation();
+
   return (
     <>
       <GlobalStyle />
@@ -141,9 +148,15 @@ const Layout = ({ children }) => {
       <LayoutContainer>
         <Sidebar>
           <NavList>
-            <NavItem><Link to="/">Inicio</Link></NavItem>
-            <NavItem><Link to="/art">Arte</Link></NavItem>
-            <NavItem><Link to="/proyects">Proyectos</Link></NavItem>
+            <NavItem>
+              <StyledLink to="/" isActive={location.pathname === '/'}>Inicio</StyledLink>
+            </NavItem>
+            <NavItem>
+              <StyledLink to="/art" isActive={location.pathname === '/art'}>Arte</StyledLink>
+            </NavItem>
+            <NavItem>
+              <StyledLink to="/proyects" isActive={location.pathname.startsWith('/proyects')}>Proyectos</StyledLink>
+            </NavItem>
           </NavList>
         </Sidebar>
         <Content>
@@ -155,7 +168,8 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  isActive: PropTypes.bool
 };
 
 export default Layout;

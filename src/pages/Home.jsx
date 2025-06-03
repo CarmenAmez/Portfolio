@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { useState, useEffect } from "react";
-import perfil from "../assets/burn.png";
+import perfil from "../assets/perfil.jpeg";
 import Layout from "../components/Layout";
 
 const frases = [
@@ -140,8 +140,8 @@ const ContenedorFoto = styled.div`
 `;
 
 const Foto = styled.img`
-  width: 180px;
-  height: 180px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #fdcae1;
@@ -304,7 +304,7 @@ const Home = () => {
         <Botonera>
           <Boton href="https://www.linkedin.com/in/carmenamez" target="_blank" rel="noopener noreferrer">LinkedIn</Boton>
           <Boton href="https://github.com/CarmenAmez" target="_blank" rel="noopener noreferrer">GitHub</Boton>
-          <Boton href="/cv.pdf" target="_blank" rel="noopener noreferrer">Ver CV</Boton>
+          <Boton href="/cv code.pdf" target="_blank" rel="noopener noreferrer">Ver CV</Boton>
         </Botonera>
       </HomeContainer>
     </Layout>
