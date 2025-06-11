@@ -15,7 +15,7 @@ const ArtGrid = styled.div`
   }
 
   @media (max-width: 1100px) {
-    column-count: 3;
+    column-count: 4;
   }
 
   @media (max-width: 700px) {
@@ -23,7 +23,7 @@ const ArtGrid = styled.div`
   }
 
   @media (max-width: 500px) {
-    column-count: 3;
+    column-count: 2;
     padding: 1rem;
   }
 `;

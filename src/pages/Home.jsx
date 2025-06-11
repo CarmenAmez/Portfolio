@@ -4,9 +4,10 @@ import perfil from "../assets/perfil.jpeg";
 import Layout from "../components/Layout";
 
 const frases = [
-  "Adaptarse no es solo cambiar, sino también escuchar, entender y aportar.",
+  "Bienvenidx a mi portfolio✨ He creado esta web desde cero combinando React, JavaScript, styled-components, Tailwind y más, para mostrar tanto mi trabajo como programadora y diseñadora como mi faceta artística. ¡Explora libremente!",
   "Soy una persona empática, capaz de ponerme en el lugar del otro para construir relaciones de trabajo sanas y efectivas.",
   "Disfruto creando ideas, buscando soluciones distintas y aprendiendo constantemente.",
+  "Pienso que adaptarse no es solo cambiar, sino también escuchar, entender y aportar.",
   "Creo que todo desafío es una oportunidad para crecer.",
   "He trabajado con equipos muy diversos y he desarrollado un liderazgo situacional: saber cuándo guiar, cuándo apoyar y cuándo dejar que otros brillen.",
   "Valoro el trabajo en equipo, la creatividad compartida y el aprendizaje continuo como motores reales de cualquier proyecto.",
@@ -17,6 +18,18 @@ const mover = keyframes`
   0% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(20px, -10px) scale(1.05); }
   100% { transform: translate(0, 0) scale(1); }
+`;
+
+// Fade in para transición entre frases
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
 const HomeContainer = styled.div`
@@ -183,9 +196,11 @@ const Carrusel = styled.div`
   border-radius: 20px;
   position: relative;
   z-index: 1;
-  transition: all 0.5s ease-in-out;
   font-size: 1.2rem;
   color: #333;
+  border: 3px solid #c8b3ee;
+  transition: border 0.4s ease, background 0.4s ease, opacity 0.4s ease;
+  animation: ${fadeIn} 0.5s ease;
 `;
 
 const Controles = styled.div`
@@ -240,7 +255,7 @@ const Home = () => {
   useEffect(() => {
     const intervalo = setInterval(() => {
       setIndice(i => (i + 1) % frases.length);
-    }, 6000);
+    }, 10000);
     return () => clearInterval(intervalo);
   }, []);
 
@@ -258,9 +273,9 @@ const Home = () => {
     const distancia = touchStartX - touchEndX;
 
     if (distancia > 50) {
-      setIndice((prev) => (prev + 1) % frases.length); // Swipe izquierda
+      setIndice((prev) => (prev + 1) % frases.length);
     } else if (distancia < -50) {
-      setIndice((prev) => (prev - 1 + frases.length) % frases.length); // Swipe derecha
+      setIndice((prev) => (prev - 1 + frases.length) % frases.length);
     }
 
     setTouchStartX(null);
@@ -285,7 +300,7 @@ const Home = () => {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <Carrusel>{frases[indice]}</Carrusel>
+          <Carrusel key={indice}>{frases[indice]}</Carrusel>
         </div>
 
         <FondoAnimado>
